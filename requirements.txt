@@ -26,6 +26,7 @@ django-sortedm2m==3.0.2
 django-tastypie==0.14.3
 execnet==1.8.0
 ExifRead==2.3.2
+gunicorn==20.1.0
 idna==2.10
 iniconfig==1.1.1
 jmbo==0.5.5
@@ -34,6 +35,7 @@ packaging==20.9
 Pillow==8.1.0
 pluggy==0.13.1
 psycopg2==2.8.6
+psycopg2-binary==2.9.3
 py==1.10.0
 pycparser==2.20
 PyJWT==2.0.1
