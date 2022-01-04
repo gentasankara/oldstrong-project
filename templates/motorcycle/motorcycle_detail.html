@@ -1,0 +1,272 @@
+{%extends 'base.html'%}
+{%block title%} | {{single_motorcycle.motorcycle_title}} {%endblock%}
+{%block content%}
+{% load static %}
+{% load humanize %}
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>{{single_motorcycle.motorcycle_title}}</h1>
+            <ul class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">{{single_motorcycle.motorcycle_title}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Car details page start -->
+<div class="car-details-page content-area-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <div class="car-details-section">
+                    <!-- Heading start -->
+                    <div class="heading-car clearfix">
+                      {%include 'includes/messages.html'%}
+                        <div class="pull-left">
+                            <h3>{{single_motorcycle.motorcycle_title}}</h3>
+                        </div>
+                        <div class="pull-right">
+                            <h3><span>Rp.{{single_motorcycle.price|intcomma}}</span></h3>
+                        </div>
+                    </div>
+                    <div id="carDetailsSlider" class="carousel car-details-sliders slide mb-40">
+                        <!-- main slider carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <img src="{{single_motorcycle.motor_photo.url}}" class="img-fluid" alt="small-motorcycle">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="1">
+                                <img src="{{single_motorcycle.motor_photo_1.url}}" class="img-fluid" alt="small-motorcycle">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="2">
+                                <img src="{{single_motorcycle.motor_photo_2.url}}" class="img-fluid" alt="small-motorcycle">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="3">
+                                <img src="{{single_motorcycle.motor_photo_3.url}}" class="img-fluid" alt="small-motorcycle">
+                            </div>
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <div class="carousel-indicators-section clearfix">
+                            <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                                <li class="list-inline-item active">
+                                    <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                                        <img src="{{single_motorcycle.motor_photo.url}}" class="img-fluid" alt="small-motorcycle">
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                                        <img src="{{single_motorcycle.motor_photo_1.url}}" class="img-fluid" alt="small-motorcycle">
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                                        <img src="{{single_motorcycle.motor_photo_2.url}}" class="img-fluid" alt="small-motorcycle">
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-3" data-slide-to="3" data-target="#carDetailsSlider">
+                                        <img src="{{single_motorcycle.motor_photo_3.url}}" class="img-fluid" alt="small-motorcycle">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tabbing box start -->
+                    <div class="tabbing tabbing-box mb-40">
+                        <ul class="nav nav-tabs" id="carTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">Vehicle overview</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="carTabContent">
+                            <div class="tab-pane fade active show" id="one" role="tabpanel" aria-labelledby="one-tab">
+                                <div class="car-description mb-50">
+                                    <h3 class="heading-2">
+                                        Description
+                                    </h3>
+                                    {{single_motorcycle.description | safe}}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="sidebar-right">
+                    <!-- Advanced search start -->
+                    <div class="widget advanced-search d-none-992">
+                      {%if single_motorcycle.sold == True%}
+                        <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal" disabled>SOLD OUT</button>
+                      {%else%}
+                        <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Order</button>
+                      {%endif%}
+
+
+                        <br>
+                        <h3 class="sidebar-title">Refine Your Search</h3>
+                        <ul>
+                            <li>
+                                <span>manufacture :</span>{{single_motorcycle.manufacture}}
+                            </li>
+                            <li>
+                                <span>model :</span>{{single_motorcycle.model}}
+                            </li>
+                            <li>
+                                <span>color :</span>{{single_motorcycle.color}}
+                            </li>
+                            <li>
+                                <span>year :</span>{{single_motorcycle.year}}
+                            </li>
+                            <li>
+                                <span>condition :</span>{{single_motorcycle.condition}}
+                            </li>
+                            <li>
+                                <span>miles :</span>{{single_motorcycle.miles|intcomma}}km
+                            </li>
+                            <li>
+                                <span>price :</span>Rp.{{single_motorcycle.price|intcomma}}
+                            </li>
+                            <li>
+                                <span>created_date :</span>{{single_motorcycle.created_date}}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Inquiry Modal -->
+                    <div class="modal fade" id="inquiryModal" role="dialog">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="contact-dealer modal-header">
+                            <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
+                            <img src="{% static 'img/logos/black-oldstrong.png' %}" alt="logo">
+                            <button type="button" class="close" data-dismiss="modal">
+                              <span>&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{%url 'order'%}" method="POST" encType="multipart/form-data">
+                              {%csrf_token%}
+                              {%if user.is_authenticated%}
+                                <input type="hidden" name="user_id" value="{{user.id}}">
+
+                              {%else%}
+                                <input type="hidden" name="user_id" value="0">
+
+                              {%endif%}
+                              <input type="hidden" name="motorcycle_id" value="{{single_motorcycle.id}}">
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">Hello, My Name is</label>
+                                  <div class="row">
+                                    <div class="col">
+                                      <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                                      {% if user.is_authenticated %} value="{{user.first_name}}" {%endif%} required>
+                                    </div>
+                                    <div class="col">
+                                      <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                                      {% if user.is_authenticated %} value="{{user.first_name}}" {%endif%} required>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <input type="text" name="motorcycle_title" class="form-control" value="{{single_motorcycle.motorcycle_title}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="price" class="col-form-label">Price</label>
+                                  <label for="value_name" class="form-control">Rp.{{single_motorcycle.price|intcomma}}</label>
+                                  <input type="hidden" name="price" class="form-control" value="{{single_motorcycle.price}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">I live in</label>
+                                  <div class="row">
+                                    <div class="col">
+                                      <input type="text" name="city" class="form-control" placeholder="Address" required>
+                                    </div>
+                                    <div class="col">
+                                      <input type="text" name="state" class="form-control" placeholder="City" required>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="row">
+                                    <div class="col">
+                                        <label for="name" class="col-form-label">You can reach me by email at</label>
+                                      <input type="email" name="email" class="form-control" placeholder="Email Address"
+                                      {% if user.is_authenticated %} value="{{user.email}}" {%endif%} required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="phone" class="col-form-label">or by phone at</label>
+                                      <input type="text" name="phone" placeholder="Phone Number (optional)" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">Payments : </label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">12938175(BCA)</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">42312342(BRI)</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">53412324(BNI)</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label"><FONT COLOR=red>Please make a payment before you click ORDER</label>
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="name" class="col-form-label">Upload your payment proof here</label>
+                                  <input type="file" name="payment_proof" required>
+                                </div>
+                                <hr>
+                                <input type="submit" value="Order" class="btn btn-block btn-danger">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Question start -->
+                    <div class="widget question">
+                        <h5 class="sidebar-title">Get a Question?</h5>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="flaticon-pin"></i>Bali,Denpasar
+                            </li>
+                            <li>
+                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">oldstrongweb@gmail.com</a>
+                            </li>
+                            <li>
+                                <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+82247026122</a>
+                            </li>
+                        </ul>
+                        <div class="social-list clearfix">
+                            <ul>
+                                <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                                <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Properties details page end -->
+{%endblock%}

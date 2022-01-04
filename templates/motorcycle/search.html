@@ -1,0 +1,156 @@
+{%extends 'base.html'%}
+{%block title%} | Search {%endblock%}
+{%block content%}
+{% load humanize%}
+
+<!-- Banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Search Results</h1>
+            <ul class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Search</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Banner end -->
+
+<!-- Search box 3 start -->
+<div class="search-box-3 sb-7 bg-active">
+    <div class="container">
+        <div class="search-area-inner">
+            <div class="search-contents">
+                <form method="GET" action="{%url 'search'%}">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                          <div class="form-group">
+                              <select class="form-control search-fields" name="manufacture">
+                                  <option selected="true" disabled="disabled">Manufacture</option>
+                                  {%for manufacture in manufacture_search%}
+                                    <option value="{{manufacture}}">{{manufacture}}</option>
+                                  {%endfor%}
+                              </select>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                          <div class="form-group">
+                              <select class="form-control search-fields" name="model">
+                                  <option selected="true" disabled="disabled">Model</option>
+                                  {%for model in model_search%}
+                                    <option value="{{model}}">{{model}}</option>
+                                  {%endfor%}
+                              </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                          <div class="form-group">
+                              <select class="form-control search-fields" name="year">
+                                  <option selected="true" disabled="disabled">Year</option>
+                                  {%for year in year_search%}
+                                    <option value="{{year}}">{{year}}</option>
+                                  {%endfor%}
+                              </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <div class="range-slider">
+                                    <div data-min="0" data-max="50000000" data-unit="Rp" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <button class="btn btn-block button-theme btn-md">
+                                    <i class="fa fa-search"></i>Find
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search box 3 end -->
+
+<!-- Featured car start -->
+<div class="featured-car content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Here's your <span>Cars</span></h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="row">
+          {%for motorcycle in motorcycle%}
+          <div class="col-lg-4 col-md-6">
+              <div class="car-box" style="min-height:500px; max-height:500px;">
+                  <div class="car-thumbnail">
+                      <a href="{%url 'motorcycle_detail' motorcycle.id%}" class="car-img">
+                          <div class="tag">For Sale</div>
+                          <img class="d-block w-100" src="{{motorcycle.motor_photo.url}}" alt="car">
+                          <div class="facilities-list clearfix">
+                              <ul>
+                                  <li>
+                                      <span><i class="flaticon-way"></i></span>{{motorcycle.miles|intcomma}} km
+                                  </li>
+                                  <li>
+                                      <span><i class="flaticon-calendar-1"></i></span>{{motorcycle.year}}
+                                  </li>
+                              </ul>
+                          </div>
+                      </a>
+                      <div class="carbox-overlap-wrapper">
+                          <div class="overlap-box">
+                              <div class="overlap-btns-area">
+                                  <div class="car-magnify-gallery">
+                                      <a href="{{motorcycle.motor_photo.url}}" class="overlap-btn">
+                                          <i class="fa fa-expand"></i>
+                                          <img class="hidden" src="{{motorcycle.motor_photo.url}}">
+                                      </a>
+                                      <a href="{{motorcycle.motor_photo_1.url}}" class="hidden">
+                                          <img class="hidden" src="{{motorcycle.motor_photo_1.url}}">
+                                      </a>
+                                      <a href="{{motorcycle.motor_photo_2.url}}" class="hidden">
+                                          <img class="hidden" src="{{motorcycle.motor_photo_2.url}}">
+                                      </a>
+                                      <a href="{{motorcycle.motor_photo_3.url}}" class="hidden">
+                                          <img class="hidden" src="{{motorcycle.motor_photo_3.url}}">
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="detail" style="min-height:120px; max-height:120px;">
+                      <h1 class="title">
+                          <a href="{%url 'motorcycle_detail' motorcycle.id%}">{{motorcycle.motorcycle_title}}</a>
+                      </h1>
+                      <div class="location">
+                          <a>
+                              {{motorcycle.condition}}
+                          </a>
+                      </div>
+                  </div>
+                  <div class="footer clearfix">
+                      <div class="pull-right">
+                          <p class="price">Rp.{{motorcycle.price|intcomma}}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+            {%endfor%}
+
+        </div>
+    </div>
+</div>
+<!-- Featured car end -->
+
+{%endblock%}
