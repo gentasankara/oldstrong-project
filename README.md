@@ -6,7 +6,7 @@ SET UP INITIALS
    $ virtualenv -m venv env
    $ source env/Scripts/Activate
 2. instal django 
-	 $ pip install django or pip install django==3.0.7 (version)
+   $ pip install django or pip install django==3.0.7 (version)
   
 3. Install the project depedencies:
    $ pip install -r requirements.txt
